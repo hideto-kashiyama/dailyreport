@@ -2,19 +2,19 @@
     
 <meta charset="UTF-8">   
 
-<h2>この会話を登録します</h2>
+<h2>この業務記録を登録します</h2>
 <%= form_tag('/home/ctgs', method: :post, id: "tou") do %>
 
         <div><textarea id="result_text" name="jtxt" rows="10" cols="60" ></textarea></div>
-        <div><textarea id="txtTarget" name="etxt" rows="10" cols="60" ></textarea></div>
-        <div><textarea id="memo" name="mtxt" rows="10" cols="60" ></textarea></div>
+       
+        
          <input type="hidden" id="p" name="st" value="" />
 
 <% end %> 
 
 <%= form_tag('/home/ctg', method: :get ) do %>
  
-  <p>シチュエーション*必須<br>
+  <p>業務の種類*必須<br>
     
     <select name='ost' id="stid" autofocus>
         
@@ -48,15 +48,11 @@
     $(function(){
         
        var query = location.search;
-       var value1 = query.split('&');
-     　console.log(decodeURIComponent(value1[0]));
-     　var value2 = value1[0].split('=');
-     　console.log(decodeURIComponent(value2[1]));
-       var value3 = value1[1].split('=');
-     　console.log(decodeURIComponent(value3[1]));
+       var value = query.split('=');
+       
  　　 
-           $('#result_text').text(decodeURIComponent(value2[1]));
-           $('#txtTarget').text(decodeURIComponent(value3[1]));
+           $('#result_text').text(decodeURIComponent(value[1]));
+          
            
     });
     
@@ -65,7 +61,7 @@
         
         if ($('[name=st').val()=="") {
             
-            alert("シチュエーションを選択してください。");
+            alert("業務の種類を選択してください。");
             $('#stid').click();
             
         } else {

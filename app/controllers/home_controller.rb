@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
- before_action :authenticate_user!
+ #before_action :authenticate_user!
   #def index
      # flash[:success] = "メッセージ"
       
@@ -46,14 +46,8 @@ class HomeController < ApplicationController
  
    def ctgs 
     
-     str = Time.now.to_s
 
-     tval=str.gsub(/[^0-9]/,"")
-
-     dtval="8-"+ tval[2...-4]+".mp3"
-     #音声データのファイル名作成
-
-     master=Master.new(user_id: 9, j: params[:jtxt], e: params[:etxt], memo: params[:mtxt], category_id: params[:st], dt: Time.now, fn: dtval)
+     master=Master.new(user_id: 9, j: params[:jtxt], category_id: params[:st], dt: Time.now )
      master.save
      
      redirect_to :action => "index"
