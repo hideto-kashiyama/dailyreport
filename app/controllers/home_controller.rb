@@ -73,13 +73,6 @@ class HomeController < ApplicationController
       JSON.dump(json_data, io)
     end
     
-    #ja.jsonのテキストを音声変換　IBM　Watosn tts
-    system('curl -X POST -u "6be0b124-83ba-4424-b77c-299a6bf12b30":"OVNSnRsKGavd" \
-    --header "Content-Type: application/json" \
-    --header "Accept: audio/wav" \
-    --data @ja.json \
-    --output ja.wav \
-    "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=ja-JP_EmiVoice"')
    
    render action: :index
    
