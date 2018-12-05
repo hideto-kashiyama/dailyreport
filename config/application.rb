@@ -14,25 +14,32 @@ module Workspace
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Asia/Tokyo'
-    config.active_record.default_timezone = :local
+    # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    # config.i18n.default_locale = :de
     config.i18n.default_locale = :ja
-
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     
-    config.to_prepare do
-      Devise::SessionsController.layout "devise"
-      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
-      Devise::ConfirmationsController.layout "devise"
-      Devise::UnlocksController.layout "devise"            
-      Devise::PasswordsController.layout "devise"        
+    config.generators do |g|
+      g.scaffold_stylesheet = false
     end
     
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.time_zone = 'Tokyo'
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      port:                 587,
+      address:              'smtp.gmail.com',
+      domain:               'gmail.com',
+      user_name:            'kweshk@gmail.com',
+      password:             ENV['MAIL_PASSWORD'],
+      authentication:       'plain',
+      enable_starttls_auto: true
+    }
   end
 end
