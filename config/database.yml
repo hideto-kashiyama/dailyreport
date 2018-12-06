@@ -24,7 +24,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: casual
+  database: dailyreport
   pool: 5
   username: kwes
   password: <%= ENV['DB_PASSWORD'] %>
